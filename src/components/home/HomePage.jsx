@@ -4,6 +4,7 @@ import axios from 'axios';
 import { MdOutlineEdit } from 'react-icons/md';
 import { FaRegTrashAlt } from 'react-icons/fa';
 import ModalDelete from '../users/ModalDelete';
+import { useAuthStore } from '../../store/useAuthStore';
 
 const HomePage = () => {
   const [userData, setUserData] = useState([]);
@@ -11,6 +12,7 @@ const HomePage = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const [deleteUserId, setDeleteUserId] = useState(null);
+  const { logout } = useAuthStore();
 
   const fetchUsers = async (pageNum) => {
     try {
@@ -46,9 +48,14 @@ const HomePage = () => {
     <section className="container font-roboto">
       <div className="flex justify-between items-center py-2 border-b border-[#E5E5E5]">
         <h1 className="font-bold">USER LIST</h1>
-        <Link to={'/add'} className="px-3 py-1 bg-amber-400 rounded-md font-medium cursor-pointer text-sm">
-          Add Users
-        </Link>
+        <div className="flex items-center gap-2 ">
+          <Link to={'/add'} className="px-3 py-1 bg-amber-400 rounded-md font-medium cursor-pointer text-sm">
+            Add Users
+          </Link>
+          <button className="px-3 py-1 bg-red-400 rounded-md font-medium cursor-pointer text-sm" onClick={logout}>
+            Logout
+          </button>
+        </div>
       </div>
       <table className="table-auto w-full mt-5 md:text-base">
         <thead className="bg-slate-500 text-white">

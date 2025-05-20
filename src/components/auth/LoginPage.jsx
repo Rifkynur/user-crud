@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuthStore } from '../../store/useAuthStore';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
   const [inputData, setInputData] = useState({
@@ -7,6 +11,8 @@ const LoginPage = () => {
     email: '',
     password: '',
   });
+  const { login } = useAuthStore();
+  const navigate = useNavigate();
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -16,9 +22,33 @@ const LoginPage = () => {
     }));
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert(inputData.password);
+    try {
+      const response = await axios.post(
+        'https://reqres.in/api/login',
+        {
+          email: inputData.email,
+          password: inputData.password,
+        },
+        {
+          headers: {
+            'x-api-key': 'reqres-free-v1', // jika kamu ingin menambahkan header ini
+          },
+        }
+      );
+      toast.success('Berhasil login');
+      login(response.data.token);
+      navigate('/');
+    } catch (error) {
+      toast.success('gagal login', error.response?.data.error || error.message);
+    }
+  };
+  const handleGuest = () => {
+    setInputData({
+      email: 'eve.holt@reqres.in',
+      password: 'pistol',
+    });
   };
   return (
     <section className="flex items-center justify-center min-h-screen w-full bg-gray-300 font-roboto">
@@ -27,24 +57,21 @@ const LoginPage = () => {
         <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-2">
             <label htmlFor="" className="font-semibold">
-              Username
-            </label>
-            <input type="text" name="username" onChange={handleChange} className="border rounded-md p-1" placeholder="Enter Your username" />
-          </div>
-          <div className="flex flex-col gap-2">
-            <label htmlFor="" className="font-semibold">
               Email
             </label>
-            <input type="text" name="email" onChange={handleChange} className="border rounded-md p-1" placeholder="Enter Your Email" />
+            <input type="email" name="email" onChange={handleChange} value={inputData.email} className="border rounded-md p-1" placeholder="Enter Your Email" />
           </div>
           <div className="flex flex-col gap-2">
             <label htmlFor="" className="font-semibold">
               Password
             </label>
-            <input type="password" name="password" onChange={handleChange} className="border rounded-md p-1" placeholder="Enter Your Password" />
+            <input type="password" name="password" onChange={handleChange} value={inputData.password} className="border rounded-md p-1" placeholder="Enter Your Password" />
           </div>
-          <button className="bg-amber-400 rounded-md py-2 font-bold" type="submit">
+          <button className="bg-amber-400 rounded-md py-2 font-bold cursor-pointer" type="submit">
             Login
+          </button>
+          <button className="bg-amber-400 rounded-md py-2 font-bold cursor-pointer" type="button" onClick={handleGuest}>
+            Guest Login
           </button>
         </form>
         <div>
