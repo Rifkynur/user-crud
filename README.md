@@ -38,7 +38,9 @@ Proyek ini adalah aplikasi frontend sederhana menggunakan React yang mendemonstr
 
 - **Email:** `eve.holt@reqres.in`
 - **Password:** bebas
-  ```json
+Contoh request:
+
+```json
 POST /api/login
 {
   "email": "eve.holt@reqres.in",
