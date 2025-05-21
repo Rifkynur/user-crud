@@ -46,6 +46,7 @@ POST /api/login
   "email": "eve.holt@reqres.in",
   "password": "cityslicka"
 }
+```
 ---
 ## Instalasi di lokal
 
