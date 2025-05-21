@@ -38,6 +38,8 @@ Proyek ini adalah aplikasi frontend sederhana menggunakan React yang mendemonstr
 
 - **Email:** `eve.holt@reqres.in`
 - **Password:** bebas
+---
+## Instalasi di lokal
 
 ```json
 POST /api/login
@@ -45,3 +47,18 @@ POST /api/login
   "email": "eve.holt@reqres.in",
   "password": "cityslicka"
 }
+
+```bash
+git clone https://github.com/Rifkynur/user-crud.git
+cd user-crud
+
+npm install
+# or
+yarn install
+
+npm run dev
+# or
+yarn dev
+```
+buka browser dan kunjungi
+http://localhost:5173
