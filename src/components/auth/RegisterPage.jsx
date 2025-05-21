@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 
 const RegisterPage = () => {
   const [inputData, setInputData] = useState({
-    username: '',
     email: '',
     password: '',
   });
@@ -45,6 +44,12 @@ const RegisterPage = () => {
       toast.error('Gagal Register', error.response?.data.error || error.message);
     }
   };
+  const handleGuest = () => {
+    setInputData({
+      email: 'eve.holt@reqres.in',
+      password: 'pistol',
+    });
+  };
   return (
     <section className="flex items-center justify-center min-h-screen w-full bg-gray-300 font-roboto">
       <div className="bg-gray-200 rounded-xl flex flex-col gap-2 p-4 max-w-[300px] md:max-w-[475px] w-full md:gap-6">
@@ -54,16 +59,19 @@ const RegisterPage = () => {
             <label htmlFor="" className="font-semibold">
               Email
             </label>
-            <input type="email" name="email" onChange={handleChange} className="border rounded-md p-1" placeholder="Enter Your Email" required />
+            <input value={inputData.email} type="email" name="email" onChange={handleChange} className="border rounded-md p-1" placeholder="Enter Your Email" required />
           </div>
           <div className="flex flex-col gap-2">
             <label htmlFor="" className="font-semibold">
               Password
             </label>
-            <input type="password" name="password" onChange={handleChange} className="border rounded-md p-1" placeholder="Enter Your Password" required />
+            <input value={inputData.password} type="password" name="password" onChange={handleChange} className="border rounded-md p-1" placeholder="Enter Your Password" required />
           </div>
           <button className="bg-amber-400 rounded-md py-2 font-bold cursor-pointer" type="submit">
             Register
+          </button>
+          <button className="bg-amber-400 rounded-md py-2 font-bold cursor-pointer" type="button" onClick={handleGuest}>
+            Guest account
           </button>
         </form>
         <div>
