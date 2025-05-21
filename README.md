@@ -1,12 +1,47 @@
-# React + Vite
+# React CRUD & Authentication with reqres.in
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Proyek ini adalah aplikasi frontend sederhana menggunakan React yang mendemonstrasikan:
 
-Currently, two official plugins are available:
+- **Autentikasi (Login & Register)**
+- **CRUD (Create, Read, Update, Delete)** data user
+- Menggunakan API dummy dari [https://reqres.in](https://reqres.in)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🔧 Fitur
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### ✅ Autentikasi
+- **Login**: Menggunakan akun dummy dari reqres.in (email: `eve.holt@reqres.in`)
+- **Register**: Simulasi register dengan API reqres.in
+- **Token** disimpan di localStorage menggunakan zustand
+
+### ✅ CRUD User
+- **Read (GET)**: Ambil daftar user
+- **Create (POST)**: Simulasi tambah user baru
+- **Update (PATCH)**: Edit user (reqres hanya terima `name` dan `job`)
+- **Delete (DELETE)**: Simulasi hapus user (response kosong, tapi dianggap berhasil)
+
+---
+
+## 🚀 Teknologi
+
+- React
+- React Router DOM
+- Axios
+- Zustand
+- Tailwind CSS
+
+---
+## 🧪 Akun Login (Dari reqres.in)
+
+> Reqres hanya menerima akun tertentu untuk login/register.
+
+- **Email:** `eve.holt@reqres.in`
+- **Password:** bebas
+
+```json
+POST /api/login
+{
+  "email": "eve.holt@reqres.in",
+  "password": "cityslicka"
+}
