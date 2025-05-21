@@ -99,7 +99,9 @@ const HomePage = () => {
                     <td>
                       <img src={data.avatar} alt={data.first_name} className="size-12 p-2 rounded-md object-cover md:size-18 lg:size-20" />
                     </td>
-                    <td>{data.first_name}</td>
+                    <td className="text-blue-900">
+                      <Link to={`/${data.id}`}>{data.first_name}</Link>
+                    </td>
                     <td>{data.last_name}</td>
                     <td>{data.email}</td>
                     <td className="flex items-center gap-2  mt-4 lg:mt-6 lg:gap-4">

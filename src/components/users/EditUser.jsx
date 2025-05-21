@@ -53,8 +53,8 @@ const EditUser = () => {
         },
       })
       .then((response) => {
-        const u = response.data.data;
-        setInputData({ name: `${u.first_name} ${u.last_name}`, job: '' });
+        const user = response.data.data;
+        setInputData({ name: `${user.first_name} ${user.last_name}`, job: '' });
       });
   }, [id]);
 

@@ -8,6 +8,7 @@ import { ToastContainer } from 'react-toastify';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import RedirectIfAuthentication from './components/auth/RedirectIfAuthentication';
 import NotFound from './components/home/NotFound';
+import DetailUser from './components/users/DetailUser';
 
 function App() {
   return (
@@ -51,6 +52,14 @@ function App() {
           element={
             <ProtectedRoute>
               <EditUser />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/:id"
+          element={
+            <ProtectedRoute>
+              <DetailUser />
             </ProtectedRoute>
           }
         />
