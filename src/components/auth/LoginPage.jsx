@@ -33,7 +33,7 @@ const LoginPage = () => {
         },
         {
           headers: {
-            'x-api-key': 'reqres-free-v1', // jika kamu ingin menambahkan header ini
+            'x-api-key': 'reqres-free-v1',
           },
         }
       );
@@ -41,7 +41,7 @@ const LoginPage = () => {
       login(response.data.token);
       navigate('/');
     } catch (error) {
-      toast.success('gagal login', error.response?.data.error || error.message);
+      toast.error('gagal login', error.response?.data.error || error.message);
     }
   };
   const handleGuest = () => {
@@ -71,7 +71,7 @@ const LoginPage = () => {
             Login
           </button>
           <button className="bg-amber-400 rounded-md py-2 font-bold cursor-pointer" type="button" onClick={handleGuest}>
-            Guest Login
+            Guest account
           </button>
         </form>
         <div>

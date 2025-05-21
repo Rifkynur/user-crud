@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import axios from 'axios';
+import { useAuthStore } from '../../store/useAuthStore';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterPage = () => {
   const [inputData, setInputData] = useState({
@@ -7,6 +11,9 @@ const RegisterPage = () => {
     email: '',
     password: '',
   });
+
+  const { login } = useAuthStore();
+  const navigate = useNavigate();
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -16,9 +23,27 @@ const RegisterPage = () => {
     }));
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert(inputData.password);
+    try {
+      const response = await axios.post(
+        'https://reqres.in/api/register',
+        {
+          email: inputData.email,
+          password: inputData.password,
+        },
+        {
+          headers: {
+            'x-api-key': 'reqres-free-v1',
+          },
+        }
+      );
+      toast.success('Register Berhasil');
+      login(response.data.token);
+      navigate('/');
+    } catch (error) {
+      toast.error('Gagal Register', error.response?.data.error || error.message);
+    }
   };
   return (
     <section className="flex items-center justify-center min-h-screen w-full bg-gray-300 font-roboto">
@@ -29,13 +54,13 @@ const RegisterPage = () => {
             <label htmlFor="" className="font-semibold">
               Email
             </label>
-            <input type="email" name="email" onChange={handleChange} className="border rounded-md p-1" placeholder="Enter Your Email" />
+            <input type="email" name="email" onChange={handleChange} className="border rounded-md p-1" placeholder="Enter Your Email" required />
           </div>
           <div className="flex flex-col gap-2">
             <label htmlFor="" className="font-semibold">
               Password
             </label>
-            <input type="password" name="password" onChange={handleChange} className="border rounded-md p-1" placeholder="Enter Your Password" />
+            <input type="password" name="password" onChange={handleChange} className="border rounded-md p-1" placeholder="Enter Your Password" required />
           </div>
           <button className="bg-amber-400 rounded-md py-2 font-bold cursor-pointer" type="submit">
             Register

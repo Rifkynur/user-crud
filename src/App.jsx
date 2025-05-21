@@ -6,6 +6,8 @@ import AddUser from './components/users/AddUser';
 import EditUser from './components/users/EditUser';
 import { ToastContainer } from 'react-toastify';
 import ProtectedRoute from './components/auth/ProtectedRoute';
+import RedirectIfAuthentication from './components/auth/RedirectIfAuthentication';
+import NotFound from './components/home/NotFound';
 
 function App() {
   return (
@@ -20,10 +22,39 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/add" element={<AddUser />} />
-        <Route path="/edit/:id" element={<EditUser />} />
+        <Route
+          path="/login"
+          element={
+            <RedirectIfAuthentication>
+              <LoginPage />
+            </RedirectIfAuthentication>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <RedirectIfAuthentication>
+              <RegisterPage />
+            </RedirectIfAuthentication>
+          }
+        />
+        <Route
+          path="/add"
+          element={
+            <ProtectedRoute>
+              <AddUser />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/edit/:id"
+          element={
+            <ProtectedRoute>
+              <EditUser />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/*" element={<NotFound />} />
       </Routes>
     </>
   );

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { IoIosCloseCircleOutline } from 'react-icons/io';
 
 const AddUser = () => {
   const [inputData, setInputData] = useState({
@@ -28,7 +29,7 @@ const AddUser = () => {
         { inputData },
         {
           headers: {
-            'x-api-key': 'reqres-free-v1', // jika kamu ingin menambahkan header ini
+            'x-api-key': 'reqres-free-v1',
           },
         }
       );
@@ -44,7 +45,10 @@ const AddUser = () => {
   return (
     <section className="flex items-center justify-center min-h-screen w-full bg-gray-300 font-roboto">
       <div className="bg-gray-200 rounded-xl flex flex-col gap-2 p-4 max-w-[300px] md:max-w-[475px] w-full md:gap-6">
-        <h1 className="font-bold text-center text-2xl md:text-3xl text-slate-700">Add User</h1>
+        <div className="flex justify-between">
+          <h1 className="font-bold text-center text-2xl md:text-3xl text-slate-700">Add User</h1>
+          <IoIosCloseCircleOutline className="size-6 cursor-pointer" onClick={() => navigate('/')} />
+        </div>
         <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-2">
             <label className="font-semibold">Username</label>
